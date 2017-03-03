@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using NUnit.Framework;
 
 namespace TDDSolo
@@ -18,18 +19,12 @@ namespace TDDSolo
                 return new[] { 2 };
             }
 
-            [Test]
-            public void GenerateZeroPrimeNumbers()
+            [TestCase(0, new int[] { })]
+            [TestCase(1, new[] { 2 })]
+            public void GenerateListOfPrimeNumbers(int primeCount, IEnumerable<int> output)
             {
-                var primes = GeneratePrimes(0);
-                Assert.IsEmpty(primes);
-            }
-
-            [Test]
-            public void GenerateOnePrimeNumber()
-            {
-                var primes = GeneratePrimes(1);
-                Assert.That(primes, Is.EqualTo(new[] { 2 }));
+                var primes = GeneratePrimes(primeCount);
+                Assert.That(primes, Is.EqualTo(output));
             }
         }
     }
