@@ -9,6 +9,10 @@ namespace TDDSolo
         {
             private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
+                if (shoppingCartItems.Length == 1 && shoppingCartItems[0].Item2 == 1)
+                {
+                    return 1;
+                }
                 return 0;
             }
 
