@@ -11,7 +11,7 @@ namespace TDDSolo
             {
                 if (shoppingCartItems.Length == 1)
                 {
-                    return shoppingCartItems[0].Item2;
+                    return shoppingCartItems[0].Item2 * shoppingCartItems[0].Item1;
                 }
                 return 0;
             }
