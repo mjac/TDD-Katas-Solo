@@ -12,14 +12,25 @@ namespace TDDSolo
         {
             private static IEnumerable<int> GeneratePrimes(int numPrimes)
             {
-                if (numPrimes >= 1)
+                if (numPrimes == 0)
                 {
-                    yield return 2;
+                    return Enumerable.Empty<int>();
                 }
-                if (numPrimes >= 2)
+
+                var primes = new List<int> {2};
+                if (numPrimes == 1)
                 {
-                    yield return 3;
+                    return primes;
                 }
+
+                int number = primes.Last() + 1;
+                while (primes.Count < numPrimes)
+                {
+                    primes.Add(number);
+                    ++number;
+                }
+
+                return primes;
             }
 
             [TestCase(0, new int[] { })]
@@ -32,9 +43,16 @@ namespace TDDSolo
             }
 
             [Test]
+            public void ListSizeIsCorrect()
+            {
+                var primes = GeneratePrimes(100);
+                Assert.That(primes, Has.Count.EqualTo(100));
+            }
+
+            [Test]
             public void GenerateLargePrimeNumbers()
             {
-                var prime = GeneratePrimes(100).ElementAt(100);
+                var prime = GeneratePrimes(100).ElementAt(100 - 1);
                 Assert.That(prime, Is.EqualTo(541));
             }
         }
