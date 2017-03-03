@@ -11,7 +11,11 @@ namespace TDDSolo
         {
             private static IEnumerable<int> GeneratePrimes(int i)
             {
-                return Enumerable.Empty<int>();
+                if (i < 1)
+                {
+                    return Enumerable.Empty<int>();
+                }
+                return new[] { 2 };
             }
 
             [Test]
@@ -19,6 +23,13 @@ namespace TDDSolo
             {
                 var primes = GeneratePrimes(0);
                 Assert.IsEmpty(primes);
+            }
+
+            [Test]
+            public void GenerateOnePrimeNumber()
+            {
+                var primes = GeneratePrimes(1);
+                Assert.That(primes, Is.EqualTo(new[] { 2 }));
             }
         }
     }
