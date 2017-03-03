@@ -9,9 +9,9 @@ namespace TDDSolo
         {
             private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
-                if (shoppingCartItems.Length == 1 && shoppingCartItems[0].Item2 == 1)
+                if (shoppingCartItems.Length == 1)
                 {
-                    return 1;
+                    return shoppingCartItems[0].Item2;
                 }
                 return 0;
             }
@@ -38,6 +38,12 @@ namespace TDDSolo
             public void OnePricedItemResultsInOnePriceTotalIfOneAdded()
             {
                 AssertCost(1, new[] { new Tuple<int, int>(1, 1) });
+            }
+
+            [Test]
+            public void OnePricedItemResultsInDoublePriceTotalIfTwoAdded()
+            {
+                AssertCost(2, new[] { new Tuple<int, int>(1, 2) });
             }
 
             private static void AssertCost(int expectedCost, Tuple<int, int>[] shoppingCartItems)
