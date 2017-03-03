@@ -12,15 +12,19 @@ namespace TDDSolo
         {
             private static IEnumerable<int> GeneratePrimes(int i)
             {
-                if (i < 1)
+                if (i >= 1)
                 {
-                    return Enumerable.Empty<int>();
+                    yield return 2;
                 }
-                return new[] { 2 };
+                if (i >= 2)
+                {
+                    yield return 3;
+                }
             }
 
             [TestCase(0, new int[] { })]
             [TestCase(1, new[] { 2 })]
+            [TestCase(2, new[] { 2, 3 })]
             public void GenerateListOfPrimeNumbers(int primeCount, IEnumerable<int> output)
             {
                 var primes = GeneratePrimes(primeCount);
