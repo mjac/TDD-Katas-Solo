@@ -22,10 +22,10 @@ namespace TDDSolo
                 AssertCost(0, new Tuple<int, int>[] { });
             }
 
-            [Test]
-            public void OneFreeItemResultsInZeroTotal()
+            [TestCase(0, 0, 0)]
+            public void SingleItemPricedCorrectly(int price, int quantity, int expectedCost)
             {
-                AssertCost(0, new[] { new Tuple<int, int>(0, 0) });
+                AssertCost(expectedCost, new[] { new Tuple<int, int>(price, quantity) });
             }
 
             [Test]
