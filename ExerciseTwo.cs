@@ -9,11 +9,12 @@ namespace TDDSolo
         {
             private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
-                if (shoppingCartItems.Length == 1)
+                int total = 0;
+                if (shoppingCartItems.Length > 0)
                 {
-                    return shoppingCartItems[0].Item2 * shoppingCartItems[0].Item1;
+                    total = shoppingCartItems[0].Item2 * shoppingCartItems[0].Item1;
                 }
-                return 0;
+                return total * shoppingCartItems.Length;
             }
 
             [Test]
