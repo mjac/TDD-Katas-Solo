@@ -7,7 +7,7 @@ namespace TDDSolo
     {
         public class ShoppingCart
         {
-            private static int Total(Tuple<int, int>[] tuples)
+            private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
                 return 0;
             }
