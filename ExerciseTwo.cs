@@ -50,10 +50,10 @@ namespace TDDSolo
                 AssertCost(3, new[] { new Tuple<int, int>(2, 1), new Tuple<int, int>(1, 1) });
             }
 
-            [Test]
-            public void ThereIsA5PercentDiscountOver100()
+            [TestCase(101, 96)]
+            public void DiscountIsApplied(int price, int expectedTotal)
             {
-                AssertCost(96, new[] { new Tuple<int, int>(101, 1) });
+                AssertCost(expectedTotal, new[] { new Tuple<int, int>(price, 1) });
             }
 
             [Test]
