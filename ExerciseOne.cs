@@ -10,13 +10,13 @@ namespace TDDSolo
     {
         public class PrimeNumbers
         {
-            private static IEnumerable<int> GeneratePrimes(int i)
+            private static IEnumerable<int> GeneratePrimes(int numPrimes)
             {
-                if (i >= 1)
+                if (numPrimes >= 1)
                 {
                     yield return 2;
                 }
-                if (i >= 2)
+                if (numPrimes >= 2)
                 {
                     yield return 3;
                 }
