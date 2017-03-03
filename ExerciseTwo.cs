@@ -46,6 +46,12 @@ namespace TDDSolo
                 AssertCost(2, new[] { new Tuple<int, int>(1, 2) });
             }
 
+            [Test]
+            public void TwoPricedItemResultsInTwoPriceTotalIfOneAdded()
+            {
+                AssertCost(2, new[] { new Tuple<int, int>(2, 1) });
+            }
+
             private static void AssertCost(int expectedCost, Tuple<int, int>[] shoppingCartItems)
             {
                 var total = Total(shoppingCartItems);
