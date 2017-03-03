@@ -23,33 +23,13 @@ namespace TDDSolo
             }
 
             [TestCase(0, 0, 0)]
+            [TestCase(0, 1, 0)]
+            [TestCase(1, 1, 1)]
+            [TestCase(2, 1, 2)]
+            [TestCase(2, 1, 2)]
             public void SingleItemPricedCorrectly(int price, int quantity, int expectedCost)
             {
                 AssertCost(expectedCost, new[] { new Tuple<int, int>(price, quantity) });
-            }
-
-            [Test]
-            public void OnePricedItemResultsInZeroTotalIfZeroAdded()
-            {
-                AssertCost(0, new[] { new Tuple<int, int>(1, 0) });
-            }
-
-            [Test]
-            public void OnePricedItemResultsInOnePriceTotalIfOneAdded()
-            {
-                AssertCost(1, new[] { new Tuple<int, int>(1, 1) });
-            }
-
-            [Test]
-            public void OnePricedItemResultsInDoublePriceTotalIfTwoAdded()
-            {
-                AssertCost(2, new[] { new Tuple<int, int>(1, 2) });
-            }
-
-            [Test]
-            public void TwoPricedItemResultsInTwoPriceTotalIfOneAdded()
-            {
-                AssertCost(2, new[] { new Tuple<int, int>(2, 1) });
             }
 
             private static void AssertCost(int expectedCost, Tuple<int, int>[] shoppingCartItems)
