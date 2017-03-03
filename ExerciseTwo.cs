@@ -40,8 +40,13 @@ namespace TDDSolo
             [Test]
             public void OnePricedItemResultsInOnePriceTotalIfOneAdded()
             {
-                var total = Total(new[] { new Tuple<int, int>(1, 1) });
-                Assert.That(total, Is.EqualTo(1));
+                AssertCost(1, new[] { new Tuple<int, int>(1, 1) });
+            }
+
+            private static void AssertCost(int expectedCost, Tuple<int, int>[] shoppingCartItems)
+            {
+                var total = Total(shoppingCartItems);
+                Assert.That(total, Is.EqualTo(expectedCost));
             }
         }
     }
