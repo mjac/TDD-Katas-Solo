@@ -19,22 +19,19 @@ namespace TDDSolo
             [Test]
             public void ZeroItemsResultsInZeroTotal()
             {
-                var total = Total(new Tuple<int, int>[] { });
-                Assert.That(total, Is.EqualTo(0));
+                AssertCost(0, new Tuple<int, int>[] { });
             }
 
             [Test]
             public void OneFreeItemResultsInZeroTotal()
             {
-                var total = Total(new[] { new Tuple<int, int>(0, 0) });
-                Assert.That(total, Is.EqualTo(0));
+                AssertCost(0, new[] { new Tuple<int, int>(0, 0) });
             }
 
             [Test]
             public void OnePricedItemResultsInZeroTotalIfZeroAdded()
             {
-                var total = Total(new[] { new Tuple<int, int>(1, 0) });
-                Assert.That(total, Is.EqualTo(0));
+                AssertCost(0, new[] { new Tuple<int, int>(1, 0) });
             }
 
             [Test]
