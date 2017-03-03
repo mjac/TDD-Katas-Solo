@@ -18,6 +18,13 @@ namespace TDDSolo
                 var total = Total(new Tuple<int, int>[] { });
                 Assert.That(total, Is.EqualTo(0));
             }
+
+            [Test]
+            public void OneFreeItemResultsInZeroTotal()
+            {
+                var total = Total(new[] { new Tuple<int, int>(0,0) });
+                Assert.That(total, Is.EqualTo(0));
+            }
         }
     }
 }
