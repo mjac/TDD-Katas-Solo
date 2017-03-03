@@ -30,6 +30,13 @@ namespace TDDSolo
                 var primes = GeneratePrimes(primeCount);
                 Assert.That(primes, Is.EqualTo(output));
             }
+
+            [Test]
+            public void GenerateLargePrimeNumbers()
+            {
+                var prime = GeneratePrimes(100).ElementAt(100);
+                Assert.That(prime, Is.EqualTo(541));
+            }
         }
     }
 }
