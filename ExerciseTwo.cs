@@ -22,7 +22,14 @@ namespace TDDSolo
             [Test]
             public void OneFreeItemResultsInZeroTotal()
             {
-                var total = Total(new[] { new Tuple<int, int>(0,0) });
+                var total = Total(new[] { new Tuple<int, int>(0, 0) });
+                Assert.That(total, Is.EqualTo(0));
+            }
+
+            [Test]
+            public void OnePricedItemResultsInZeroTotalIfZeroAdded()
+            {
+                var total = Total(new[] { new Tuple<int, int>(1, 0) });
                 Assert.That(total, Is.EqualTo(0));
             }
         }
