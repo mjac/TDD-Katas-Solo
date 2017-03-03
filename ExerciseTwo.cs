@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace TDDSolo
@@ -9,12 +10,7 @@ namespace TDDSolo
         {
             private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
-                int total = 0;
-                if (shoppingCartItems.Length > 0)
-                {
-                    total = shoppingCartItems[0].Item2 * shoppingCartItems[0].Item1;
-                }
-                return total * shoppingCartItems.Length;
+                return shoppingCartItems.Sum(item => item.Item2 * item.Item1);
             }
 
             [Test]
