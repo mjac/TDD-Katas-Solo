@@ -32,6 +32,13 @@ namespace TDDSolo
                 var total = Total(new[] { new Tuple<int, int>(1, 0) });
                 Assert.That(total, Is.EqualTo(0));
             }
+
+            [Test]
+            public void OnePricedItemResultsInOnePriceTotalIfOneAdded()
+            {
+                var total = Total(new[] { new Tuple<int, int>(1, 1) });
+                Assert.That(total, Is.EqualTo(1));
+            }
         }
     }
 }
