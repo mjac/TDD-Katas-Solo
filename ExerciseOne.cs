@@ -17,7 +17,7 @@ namespace TDDSolo
                     return Enumerable.Empty<int>();
                 }
 
-                var primes = new List<int> {2};
+                var primes = new List<int> { 2 };
                 if (numPrimes == 1)
                 {
                     return primes;
@@ -26,7 +26,10 @@ namespace TDDSolo
                 int number = primes.Last() + 1;
                 while (primes.Count < numPrimes)
                 {
-                    primes.Add(number);
+                    if (primes.All(i => number % i != 0))
+                    {
+                        primes.Add(number);
+                    }
                     ++number;
                 }
 
