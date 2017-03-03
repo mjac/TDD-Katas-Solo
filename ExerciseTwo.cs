@@ -10,7 +10,12 @@ namespace TDDSolo
         {
             private static int Total(Tuple<int, int>[] shoppingCartItems)
             {
-                return shoppingCartItems.Sum(item => item.Item2 * item.Item1);
+                var total = shoppingCartItems.Sum(item => item.Item2 * item.Item1);
+                if (total > 100)
+                {
+                    return total - total * 5 / 100;
+                }
+                return total;
             }
 
             [Test]
