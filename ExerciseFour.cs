@@ -13,17 +13,40 @@ namespace TDDSolo
             Cylinder,
         }
 
+        class ShapeVolumeCalc
+        {
+            private readonly double _coefficient;
+
+            public ShapeVolumeCalc(double coefficient)
+            {
+                _coefficient = coefficient;
+            }
+
+            public double CalculateVolume(double width, double height)
+            {
+                return _coefficient * width * width * height;
+            }
+        }
+
         private static double CalculateVolume(double width, double height, Shape shape)
         {
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
+
+            var shapeVolumeCalc = CreateShapeVolumeCalc(shape);
+
+            return shapeVolumeCalc.CalculateVolume(width, height);
+        }
+
+        private static ShapeVolumeCalc CreateShapeVolumeCalc(Shape shape)
+        {
             switch (shape)
             {
                 case Shape.Pyramid:
-                    return width * width * height / 3;
+                    return new ShapeVolumeCalc(1.0 / 3.0);
                 case Shape.Cylinder:
-                    return width * width * height * Math.PI / 4;
+                    return new ShapeVolumeCalc(Math.PI / 4);
                 case Shape.Cube:
-                    return width * width * width;
+                    return new ShapeVolumeCalc(1);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape));
             }
