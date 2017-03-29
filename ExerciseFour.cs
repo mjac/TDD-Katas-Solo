@@ -13,9 +13,9 @@ namespace TDDSolo
             {
                 if (pyramid)
                 {
-                    return (Math.Pow(width, 2) * height) / 3;
+                    return width * width * height / 3;
                 }
-                return Math.PI * Math.Pow(width / 2, 2) * height;
+                return width * width * height * Math.PI / 4;
             }
             return width * width * width;
         }
