@@ -16,15 +16,15 @@ namespace TDDSolo
         private static double CalculateVolume(double width, double height, Shape shape)
         {
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
-            if (shape == Shape.Pyramid)
+            switch (shape)
             {
-                return width * width * height / 3;
+                case Shape.Pyramid:
+                    return width * width * height / 3;
+                case Shape.Cylinder:
+                    return width * width * height * Math.PI / 4;
+                default:
+                    return width * width * width;
             }
-            if (shape == Shape.Cylinder)
-            {
-                return width * width * height * Math.PI / 4;
-            }
-            return width * width * width;
         }
 
         [TestCase(0, 0)]
