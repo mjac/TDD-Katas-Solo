@@ -12,28 +12,14 @@ namespace TDDSolo
             return 1;
         }
 
-        [Test]
-        public void ZeroSidedCubeHasZeroVolume()
+        [TestCase(0, 0)]
+        [TestCase(1, 1)]
+        [TestCase(2, 8)]
+        [TestCase(1.5, 3.375, 0.01)]
+        public void CubeHasVolume(double size, double volume, double tolerance = 0)
         {
-            Assert.AreEqual(0, CalculateCubeVolume(0));
+            Assert.AreEqual(volume, CalculateCubeVolume(size));
         }
-
-        [Test]
-        public void CheckOneCubeCase()
-        {
-            Assert.AreEqual(1, CalculateCubeVolume(1));
-        }
-
-        [Test]
-        public void CubeWith2LengthSideHasVolume8()
-        {
-            Assert.AreEqual(8, CalculateCubeVolume(2));
-        }
-
-        [Test]
-        public void CubeWithNonIntegerLengthSideHasCorrectVolume()
-        {
-            Assert.AreEqual(3.375, CalculateCubeVolume(1.5), 0.01);
-        }
+        
     }
 }
