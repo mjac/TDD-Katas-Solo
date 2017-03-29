@@ -22,8 +22,10 @@ namespace TDDSolo
                     return width * width * height / 3;
                 case Shape.Cylinder:
                     return width * width * height * Math.PI / 4;
-                default:
+                case Shape.Cube:
                     return width * width * width;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(shape));
             }
         }
 
@@ -34,6 +36,12 @@ namespace TDDSolo
         public void CubeHasVolume(double size, double volume)
         {
             Assert.AreEqual(volume, CalculateVolume(size, size, Shape.Cube));
+        }
+
+        [Test]
+        public void CannotCalculateVolumeOfMissingShape()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => CalculateVolume(1, 1, (Shape)(-1)));
         }
 
         [Test]
