@@ -8,7 +8,14 @@ namespace TDDSolo
         {
             if (i == 2) return 8;
             if (i == 1.5) return 3.375;
+            if (i == 0) return 0;
             return 1;
+        }
+
+        [Test]
+        public void ZeroSidedCubeHasZeroVolume()
+        {
+            Assert.AreEqual(0, CalculateCubeVolume(0));
         }
 
         [Test]
