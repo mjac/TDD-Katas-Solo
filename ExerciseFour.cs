@@ -6,10 +6,7 @@ namespace TDDSolo
     {
         private static double CalculateCubeVolume(double i)
         {
-            if (i == 2) return 8;
-            if (i == 1.5) return 3.375;
-            if (i == 0) return 0;
-            return 1;
+            return i * i * i;
         }
 
         [TestCase(0, 0)]
@@ -20,6 +17,5 @@ namespace TDDSolo
         {
             Assert.AreEqual(volume, CalculateCubeVolume(size));
         }
-
     }
 }
