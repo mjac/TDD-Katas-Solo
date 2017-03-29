@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace TDDSolo
@@ -6,6 +7,7 @@ namespace TDDSolo
     {
         private static double CalculateCubeVolume(double i)
         {
+            if (i < 0) throw new ArgumentOutOfRangeException(nameof(i));
             return i * i * i;
         }
 
@@ -17,5 +19,11 @@ namespace TDDSolo
         {
             Assert.AreEqual(volume, CalculateCubeVolume(size));
         }
+
+        [Test]
+        public void NoNegativeCubeSides()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => CalculateCubeVolume(-1));
+        } 
     }
 }
