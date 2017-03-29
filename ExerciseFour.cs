@@ -44,10 +44,10 @@ namespace TDDSolo
 
         [TestCase(0, 0, 0)]
         [TestCase(1, 1, Math.PI)]
-        [TestCase(2, 1, 2 * Math.PI)]
-        [TestCase(1, 2, 4 * Math.PI)]
+        [TestCase(1, 2, 2 * Math.PI)]
+        [TestCase(2, 1, 4 * Math.PI)]
         [TestCase(2, 2, 8 * Math.PI)]
-        public void CylinderHasVolume(double height, double radius, double volume)
+        public void CylinderHasVolume(double radius, double height, double volume)
         {
             var diameter = 2 * radius;
             Assert.AreEqual(volume, CalculateVolume(diameter, height, Shape.Cylinder));
@@ -55,10 +55,10 @@ namespace TDDSolo
 
         [TestCase(0, 0, 0.0)]
         [TestCase(1, 1, 1.0 / 3.0)]
-        [TestCase(2, 1, 2.0 / 3.0)]
-        [TestCase(1, 2, 4.0 / 3.0)]
+        [TestCase(1, 2, 2.0 / 3.0)]
+        [TestCase(2, 1, 4.0 / 3.0)]
         [TestCase(2, 2, 8.0 / 3.0)]
-        public void PyramidHasVolume(double height, double width, double volume)
+        public void PyramidHasVolume(double width, double height, double volume)
         {
             Assert.AreEqual(volume, CalculateVolume(width, height, Shape.Pyramid));
         }
