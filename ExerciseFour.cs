@@ -6,11 +6,15 @@ namespace TDDSolo
 {
     public class ExerciseFour
     {
-        private static double CalculateVolume(double width, double height = -1)
+        private static double CalculateVolume(double width, double height = -1, bool pyramid = false)
         {
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
             if (height > 0)
             {
+                if (pyramid)
+                {
+                    return (Math.Pow(width, 2) * height) / 3;
+                }
                 return Math.PI * Math.Pow(width / 2, 2) * height;
             }
             return width * width * width;
@@ -31,7 +35,6 @@ namespace TDDSolo
             Assert.Throws<ArgumentOutOfRangeException>(() => CalculateVolume(-1));
         }
 
-
         [TestCase(0, 0, 0)]
         [TestCase(1, 1, Math.PI)]
         [TestCase(2, 1, 2 * Math.PI)]
@@ -39,7 +42,18 @@ namespace TDDSolo
         [TestCase(2, 2, 8 * Math.PI)]
         public void CylinderHasVolume(double height, double radius, double volume)
         {
-            Assert.AreEqual(volume, CalculateVolume(2 * radius, height));
+            var diameter = 2 * radius;
+            Assert.AreEqual(volume, CalculateVolume(diameter, height));
+        }
+
+        [TestCase(0, 0, 0.0)]
+        [TestCase(1, 1, 1.0 / 3.0)]
+        [TestCase(2, 1, 2.0 / 3.0)]
+        [TestCase(1, 2, 4.0 / 3.0)]
+        [TestCase(2, 2, 8.0 / 3.0)]
+        public void PyramidHasVolume(double height, double width, double volume)
+        {
+            Assert.AreEqual(volume, CalculateVolume(width, height, true));
         }
     }
 }
