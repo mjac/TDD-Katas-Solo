@@ -6,15 +6,22 @@ namespace TDDSolo
 {
     public class ExerciseFour
     {
-        private static double CalculateVolume(double width, double height = -1, bool pyramid = false)
+        enum Shape
+        {
+            Pyramid,
+            Cube,
+            Cylinder,
+        }
+
+        private static double CalculateVolume(double width, double height, Shape shape)
         {
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
-            if (height > 0)
+            if (shape == Shape.Pyramid)
             {
-                if (pyramid)
-                {
-                    return width * width * height / 3;
-                }
+                return width * width * height / 3;
+            }
+            if (shape == Shape.Cylinder)
+            {
                 return width * width * height * Math.PI / 4;
             }
             return width * width * width;
@@ -26,13 +33,13 @@ namespace TDDSolo
         [TestCase(1.5, 3.375)]
         public void CubeHasVolume(double size, double volume)
         {
-            Assert.AreEqual(volume, CalculateVolume(size));
+            Assert.AreEqual(volume, CalculateVolume(size, size, Shape.Cube));
         }
 
         [Test]
         public void NoNegativeCubeSides()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => CalculateVolume(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CalculateVolume(-1, -1, Shape.Cube));
         }
 
         [TestCase(0, 0, 0)]
@@ -43,7 +50,7 @@ namespace TDDSolo
         public void CylinderHasVolume(double height, double radius, double volume)
         {
             var diameter = 2 * radius;
-            Assert.AreEqual(volume, CalculateVolume(diameter, height));
+            Assert.AreEqual(volume, CalculateVolume(diameter, height, Shape.Cylinder));
         }
 
         [TestCase(0, 0, 0.0)]
@@ -53,7 +60,7 @@ namespace TDDSolo
         [TestCase(2, 2, 8.0 / 3.0)]
         public void PyramidHasVolume(double height, double width, double volume)
         {
-            Assert.AreEqual(volume, CalculateVolume(width, height, true));
+            Assert.AreEqual(volume, CalculateVolume(width, height, Shape.Pyramid));
         }
     }
 }
