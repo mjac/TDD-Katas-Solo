@@ -16,7 +16,7 @@ namespace TDDSolo
             public double AverageRating => _reviews.Average();
 
             public string LatestReviewer { get; private set; }
-            public string LatestReviewText => string.Empty;
+            public string LatestReviewText { get; private set; }
 
             private readonly IList<int> _reviews = new List<int>();
 
@@ -40,6 +40,14 @@ namespace TDDSolo
                 _reviews.Add(rating);
                 
                 LatestReviewer = reviewer;
+                LatestReviewText = string.Empty;
+            }
+
+            internal void AddReview(int rating, string reviewer, string reviewText)
+            {
+                AddReview(rating, reviewer);
+
+                LatestReviewText = reviewText;
             }
         }
 
@@ -150,6 +158,15 @@ namespace TDDSolo
             movie.AddReview(AnyRating);
 
             Assert.That(movie.LatestReviewText, Is.Empty);
+        }
+
+        [Test]
+        public void CanSpecifyReviewText()
+        {
+            var movie = new Movie();
+            movie.AddReview(AnyRating, null, "reviewText");
+
+            Assert.That(movie.LatestReviewText, Is.Not.Empty);
         }
     }
 
