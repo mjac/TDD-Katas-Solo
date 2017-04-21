@@ -32,9 +32,9 @@ namespace TDDSolo
                 AddReview(rating, "Anonymous");
             }
 
-            public int NumberOfReviewsForRating(int i)
+            public int NumberOfReviewsForRating(int rating)
             {
-                return _reviews.Count(x => x.Rating == i);
+                return _reviews.Count(x => x.Rating == rating);
             }
 
             internal void AddReview(int rating, string reviewer)
