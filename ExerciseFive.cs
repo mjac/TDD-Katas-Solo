@@ -32,21 +32,19 @@ namespace TDDSolo
 
             internal void AddReview(int rating, string reviewer)
             {
+                AddReview(rating, reviewer, string.Empty);
+            }
+
+            internal void AddReview(int rating, string reviewer, string reviewText)
+            {
                 if (rating > 5 || rating < 1)
                 {
                     throw new ArgumentOutOfRangeException(nameof(rating));
                 }
 
                 _reviews.Add(rating);
-                
+
                 LatestReviewer = reviewer;
-                LatestReviewText = string.Empty;
-            }
-
-            internal void AddReview(int rating, string reviewer, string reviewText)
-            {
-                AddReview(rating, reviewer);
-
                 LatestReviewText = reviewText;
             }
         }
