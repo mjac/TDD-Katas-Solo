@@ -15,6 +15,8 @@ namespace TDDSolo
 
             public double AverageRating => _reviews.Average();
 
+            public string LatestReviewer { get; private set; }
+
             private readonly IList<int> _reviews = new List<int>();
 
             public void AddReview(int i)
@@ -25,6 +27,7 @@ namespace TDDSolo
                 }
 
                 _reviews.Add(i);
+                LatestReviewer = "Anonymous";
             }
 
             public int NumberOfReviewsForRating(int i)
@@ -69,7 +72,7 @@ namespace TDDSolo
             var movie = new Movie();
             Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(rating));
         }
-
+        
         [Test]
         public void AddingTwoReviewsWithDifferantValuesHasAverageBetweenThem()
         {
@@ -114,5 +117,15 @@ namespace TDDSolo
             var numberOfReviewsForRating2 = movie.NumberOfReviewsForRating(2);
             Assert.That(numberOfReviewsForRating2, Is.EqualTo(1));
         }
+
+        [Test]
+        public void DefaultReviewerIsAnonymous()
+        {
+            var movie = new Movie();
+            movie.AddReview(AnyRating);
+
+            Assert.That(movie.LatestReviewer, Is.EqualTo("Anonymous"));
+        }
     }
+
 }
