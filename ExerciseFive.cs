@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace TDDSolo
 {
@@ -14,9 +11,11 @@ namespace TDDSolo
 
         public class Movie
         {
-            public int TotalReviews { get; internal set; }
+            public int TotalReviews => _reviews.Count;
 
-            public int AverageRating { get; internal set; }
+            public double AverageRating => _reviews.Average();
+
+            private readonly IList<int> _reviews = new List<int>();
 
             public void AddReview(int i)
             {
@@ -25,13 +24,12 @@ namespace TDDSolo
                     throw new ArgumentOutOfRangeException(nameof(i));
                 }
 
-                AverageRating = (TotalReviews * AverageRating + i) / (TotalReviews + 1);
-                TotalReviews += 1;
+                _reviews.Add(i);
             }
 
             public int NumberOfReviewsForRating(int i)
             {
-                return TotalReviews;
+                return _reviews.Count(x => x == i);
             }
         }
 
@@ -101,6 +99,20 @@ namespace TDDSolo
             var numberOfReviewsForRating = movie.NumberOfReviewsForRating(AnyRating);
 
             Assert.That(numberOfReviewsForRating, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AddingOneReviewToTwoRatingGroups()
+        {
+            var movie = new Movie();
+            movie.AddReview(1);
+            movie.AddReview(2);
+
+            var numberOfReviewsForRating1 = movie.NumberOfReviewsForRating(1);
+            Assert.That(numberOfReviewsForRating1, Is.EqualTo(1));
+
+            var numberOfReviewsForRating2 = movie.NumberOfReviewsForRating(2);
+            Assert.That(numberOfReviewsForRating2, Is.EqualTo(1));
         }
     }
 }
