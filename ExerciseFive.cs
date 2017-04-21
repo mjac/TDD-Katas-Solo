@@ -13,11 +13,12 @@ namespace TDDSolo
         {
             public int TotalReviews { get; internal set; }
 
-            public int AverageRating => 1;
+            public int AverageRating { get; internal set; }
 
-            public void AddReview()
+            public void AddReview(int i = 1)
             {
                 TotalReviews += 1;
+                AverageRating = i;
             }
         }
 
@@ -44,6 +45,15 @@ namespace TDDSolo
             movie.AddReview();
 
             Assert.That(movie.AverageRating, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AddingOneTwoStarReviewGivesTwoStarAverage()
+        {
+            var movie = new Movie();
+            movie.AddReview(2);
+
+            Assert.That(movie.AverageRating, Is.EqualTo(2));
         }
     }
 }
