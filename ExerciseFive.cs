@@ -12,6 +12,11 @@ namespace TDDSolo
         public class ReviewCentre
         {
             public int TotalReviews { get; internal set; }
+
+            public void AddReview()
+            {
+                TotalReviews += 1;
+            }
         }
 
         [Test]
@@ -19,6 +24,15 @@ namespace TDDSolo
         {
             var reviewCentre = new ReviewCentre();
             Assert.That(reviewCentre.TotalReviews, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void AddingAReviewIncreaseNumberOfReviewsToOne()
+        {
+            var reviewCentre = new ReviewCentre();
+            reviewCentre.AddReview();
+
+            Assert.That(reviewCentre.TotalReviews, Is.EqualTo(1));
         }
     }
 }
