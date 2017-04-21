@@ -19,6 +19,11 @@ namespace TDDSolo
 
             public void AddReview(int i)
             {
+                if (i > 5)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(i));
+                }
+
                 TotalReviews += 1;
                 AverageRating = i;
             }
@@ -51,6 +56,13 @@ namespace TDDSolo
             movie.AddReview(review);
 
             Assert.That(movie.AverageRating, Is.EqualTo(review));
+        }
+
+        [Test]
+        public void AddingARatingOver5CausesException()
+        {
+            var movie = new Movie();
+            Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(6));
         }
     }
 }
