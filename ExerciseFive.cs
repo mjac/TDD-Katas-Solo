@@ -11,14 +11,21 @@ namespace TDDSolo
 
         public class Movie
         {
+            private class Review
+            {
+                public string Reviewer { get; set; }
+                public string Text { get; set; }
+                public int Rating { get; set; }
+            }
+
             public int TotalReviews => _reviews.Count;
 
-            public double AverageRating => _reviews.Average();
+            public double AverageRating => _reviews.Average(o => o.Rating);
 
-            public string LatestReviewer { get; private set; }
-            public string LatestReviewText { get; private set; }
+            public string LatestReviewer => _reviews.Last().Reviewer;
+            public string LatestReviewText => _reviews.Last().Text;
 
-            private readonly IList<int> _reviews = new List<int>();
+            private readonly IList<Review> _reviews = new List<Review>();
 
             public void AddReview(int rating)
             {
@@ -27,7 +34,7 @@ namespace TDDSolo
 
             public int NumberOfReviewsForRating(int i)
             {
-                return _reviews.Count(x => x == i);
+                return _reviews.Count(x => x.Rating == i);
             }
 
             internal void AddReview(int rating, string reviewer)
@@ -42,10 +49,14 @@ namespace TDDSolo
                     throw new ArgumentOutOfRangeException(nameof(rating));
                 }
 
-                _reviews.Add(rating);
+                var review = new Review
+                {
+                    Rating = rating,
+                    Reviewer = reviewer,
+                    Text = reviewText,
+                };
 
-                LatestReviewer = reviewer;
-                LatestReviewText = reviewText;
+                _reviews.Add(review);
             }
         }
 
@@ -85,7 +96,7 @@ namespace TDDSolo
             var movie = new Movie();
             Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(rating));
         }
-        
+
         [Test]
         public void AddingTwoReviewsWithDifferantValuesHasAverageBetweenThem()
         {
