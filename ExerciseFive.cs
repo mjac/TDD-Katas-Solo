@@ -58,18 +58,12 @@ namespace TDDSolo
             Assert.That(movie.AverageRating, Is.EqualTo(review));
         }
 
-        [Test]
-        public void AddingARatingOver5CausesException()
+        [TestCase(0)]
+        [TestCase(6)]
+        public void AddingOutOfBoundsRatingCausesException(int rating)
         {
             var movie = new Movie();
-            Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(6));
-        }
-
-        [Test]
-        public void AddingARatingUnderOneThrowsException()
-        {
-            var movie = new Movie();
-            Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(0));
+            Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(rating));
         }
     }
 }
