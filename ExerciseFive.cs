@@ -9,6 +9,8 @@ namespace TDDSolo
 {
     public class ExerciseFive
     {
+        private const int DefaultRating = 1;
+
         public class Movie
         {
             public int TotalReviews { get; internal set; }
@@ -33,7 +35,7 @@ namespace TDDSolo
         public void AddingAReviewIncreaseNumberOfReviewsToOne()
         {
             var movie = new Movie();
-            movie.AddReview(1);
+            movie.AddReview(DefaultRating);
 
             Assert.That(movie.TotalReviews, Is.EqualTo(1));
         }
