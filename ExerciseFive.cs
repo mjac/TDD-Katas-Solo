@@ -19,15 +19,9 @@ namespace TDDSolo
 
             private readonly IList<int> _reviews = new List<int>();
 
-            public void AddReview(int i)
+            public void AddReview(int rating)
             {
-                if (i > 5 || i < 1)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(i));
-                }
-
-                _reviews.Add(i);
-                LatestReviewer = "Anonymous";
+                AddReview(rating, "Anonymous");
             }
 
             public int NumberOfReviewsForRating(int i)
@@ -37,7 +31,13 @@ namespace TDDSolo
 
             internal void AddReview(int rating, string reviewer)
             {
-                AddReview(rating);
+                if (rating > 5 || rating < 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rating));
+                }
+
+                _reviews.Add(rating);
+                
                 LatestReviewer = reviewer;
             }
         }
