@@ -40,22 +40,17 @@ namespace TDDSolo
             Assert.That(movie.TotalReviews, Is.EqualTo(1));
         }
 
-        [Test]
-        public void AddingASingleOneStarReviewGivesOneStarAverageRating()
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        public void AddingASingleReviewHasAverageRatingOfThatReview(int review)
         {
             var movie = new Movie();
-            movie.AddReview(1);
+            movie.AddReview(review);
 
-            Assert.That(movie.AverageRating, Is.EqualTo(1));
-        }
-
-        [Test]
-        public void AddingOneTwoStarReviewGivesTwoStarAverage()
-        {
-            var movie = new Movie();
-            movie.AddReview(2);
-
-            Assert.That(movie.AverageRating, Is.EqualTo(2));
+            Assert.That(movie.AverageRating, Is.EqualTo(review));
         }
     }
 }
