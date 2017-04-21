@@ -31,7 +31,7 @@ namespace TDDSolo
 
             public int NumberOfReviewsForRating(int i)
             {
-                return 1;
+                return TotalReviews;
             }
         }
 
@@ -80,6 +80,16 @@ namespace TDDSolo
             movie.AddReview(5);
 
             Assert.That(movie.AverageRating, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void RatingGroupIsInitiallyEmpty()
+        {
+            var movie = new Movie();
+
+            var numberOfReviewsForRating = movie.NumberOfReviewsForRating(AnyRating);
+
+            Assert.That(numberOfReviewsForRating, Is.EqualTo(0));
         }
 
         [Test]
