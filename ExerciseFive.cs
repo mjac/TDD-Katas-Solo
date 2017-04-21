@@ -24,8 +24,8 @@ namespace TDDSolo
                     throw new ArgumentOutOfRangeException(nameof(i));
                 }
 
+                AverageRating = (TotalReviews * AverageRating + i) / (TotalReviews + 1);
                 TotalReviews += 1;
-                AverageRating = i;
             }
         }
 
@@ -64,6 +64,16 @@ namespace TDDSolo
         {
             var movie = new Movie();
             Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(rating));
+        }
+
+        [Test]
+        public void AddingTwoReviewsWithDifferantValuesHasAverageBetweenThem()
+        {
+            var movie = new Movie();
+            movie.AddReview(1);
+            movie.AddReview(5);
+
+            Assert.That(movie.AverageRating, Is.EqualTo(3));
         }
     }
 }
