@@ -34,6 +34,12 @@ namespace TDDSolo
             {
                 return _reviews.Count(x => x == i);
             }
+
+            internal void AddReview(int rating, string reviewer)
+            {
+                AddReview(rating);
+                LatestReviewer = reviewer;
+            }
         }
 
         [Test]
@@ -125,6 +131,15 @@ namespace TDDSolo
             movie.AddReview(AnyRating);
 
             Assert.That(movie.LatestReviewer, Is.EqualTo("Anonymous"));
+        }
+
+        [Test]
+        public void CanSpecifyReviewer()
+        {
+            var movie = new Movie();
+            movie.AddReview(AnyRating, "ReviewerName");
+
+            Assert.That(movie.LatestReviewer, Is.EqualTo("ReviewerName"));
         }
     }
 
