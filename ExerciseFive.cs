@@ -19,7 +19,7 @@ namespace TDDSolo
 
             public void AddReview(int i)
             {
-                if (i > 5)
+                if (i > 5 || i < 1)
                 {
                     throw new ArgumentOutOfRangeException(nameof(i));
                 }
@@ -63,6 +63,13 @@ namespace TDDSolo
         {
             var movie = new Movie();
             Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(6));
+        }
+
+        [Test]
+        public void AddingARatingUnderOneThrowsException()
+        {
+            var movie = new Movie();
+            Assert.Throws<ArgumentOutOfRangeException>(() => movie.AddReview(0));
         }
     }
 }
