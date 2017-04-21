@@ -86,9 +86,11 @@ namespace TDDSolo
         public void AddingOneReviewAddOneToThatRatingGroup()
         {
             var movie = new Movie();
-            movie.AddReview(1);
+            movie.AddReview(AnyRating);
 
-            Assert.That(movie.NumberOfReviewsForRating(1), Is.EqualTo(1));
+            var numberOfReviewsForRating = movie.NumberOfReviewsForRating(AnyRating);
+
+            Assert.That(numberOfReviewsForRating, Is.EqualTo(1));
         }
     }
 }
