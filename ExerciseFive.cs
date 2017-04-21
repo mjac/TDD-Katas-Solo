@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace TDDSolo
 {
@@ -26,6 +27,11 @@ namespace TDDSolo
 
                 AverageRating = (TotalReviews * AverageRating + i) / (TotalReviews + 1);
                 TotalReviews += 1;
+            }
+
+            public int NumberOfReviewsForRating(int i)
+            {
+                return 1;
             }
         }
 
@@ -74,6 +80,15 @@ namespace TDDSolo
             movie.AddReview(5);
 
             Assert.That(movie.AverageRating, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void AddingOneReviewAddOneToThatRatingGroup()
+        {
+            var movie = new Movie();
+            movie.AddReview(1);
+
+            Assert.That(movie.NumberOfReviewsForRating(1), Is.EqualTo(1));
         }
     }
 }
