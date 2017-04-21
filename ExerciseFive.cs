@@ -9,7 +9,7 @@ namespace TDDSolo
 {
     public class ExerciseFive
     {
-        public class ReviewCentre
+        public class Movie
         {
             public int TotalReviews { get; internal set; }
 
@@ -20,19 +20,19 @@ namespace TDDSolo
         }
 
         [Test]
-        public void ReviewCentreIsInitiallyEmpty()
+        public void MovieReviewsIsInitiallyEmpty()
         {
-            var reviewCentre = new ReviewCentre();
-            Assert.That(reviewCentre.TotalReviews, Is.EqualTo(0));
+            var movie = new Movie();
+            Assert.That(movie.TotalReviews, Is.EqualTo(0));
         }
 
         [Test]
         public void AddingAReviewIncreaseNumberOfReviewsToOne()
         {
-            var reviewCentre = new ReviewCentre();
-            reviewCentre.AddReview();
+            var movie = new Movie();
+            movie.AddReview();
 
-            Assert.That(reviewCentre.TotalReviews, Is.EqualTo(1));
+            Assert.That(movie.TotalReviews, Is.EqualTo(1));
         }
     }
 }
